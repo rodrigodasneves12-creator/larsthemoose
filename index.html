@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Lars the Moose</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a forest road read top to bottom — warning sign hero, road band with Lars, then lore, joining steps, setup, fine print. */
+:root{
+  --bg:#eef0e6;        /* birch bark */
+  --surface:#f8f9f2;
+  --fg:#17201a;        /* spruce ink */
+  --muted:#56615a;
+  --line:#c9cfbf;
+  --sign:#f5c400;      /* Swedish warning-sign yellow */
+  --sign-red:#c8102e;
+  --asphalt:#2a2e2b;
+  --asphalt-fg:#e9ece4;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101612;--surface:#18201b;--fg:#e6ebe1;--muted:#9aa69d;--line:#2d3830;
+  --sign:#f2c200;--sign-red:#e0334c;--asphalt:#1f2421;--asphalt-fg:#e6ebe1;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101612;--surface:#18201b;--fg:#e6ebe1;--muted:#9aa69d;--line:#2d3830;
+  --sign:#f2c200;--sign-red:#e0334c;--asphalt:#1f2421;--asphalt-fg:#e6ebe1;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.02;text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sign);outline-offset:3px;border-radius:4px}
+.label{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.25rem;text-decoration:none}
+.brand span{background:var(--sign);color:#17201a;padding:1px 7px;border-radius:4px;margin-left:6px;font-size:.95rem}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{text-decoration:none;color:var(--muted);font-weight:700;font-size:.95rem}
+nav ul a:hover{color:var(--fg)}
+@media (max-width:560px){nav ul li:not(:last-child){display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:32px 48px}
+.hero h1{font-size:clamp(3rem,9vw,6.5rem)}
+.hero h1 em{font-style:normal;display:block;color:var(--muted);font-weight:500;font-size:.42em;letter-spacing:0;margin-top:14px}
+.hero p.lede{margin-top:22px;max-width:44ch;font-size:1.15rem}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:1rem;padding:13px 22px;border-radius:999px;border:2px solid var(--fg);text-decoration:none;cursor:pointer;background:transparent;color:var(--fg)}
+.btn.primary{background:var(--sign);border-color:var(--sign);color:#17201a}
+.btn:hover{transform:translateY(-1px)}
+.sign{width:100%;max-width:380px;justify-self:center;filter:drop-shadow(0 10px 18px rgba(0,0,0,.18))}
+.sign .moose{transform-origin:60px 60px;animation:none}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.sign{max-width:240px;order:-1}}
+
+/* contract */
+.ca{margin-top:22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;max-width:520px}
+.ca code{font-family:var(--mono);font-size:.85rem;min-width:0;overflow-wrap:anywhere;flex:1}
+.ca button{font:700 .85rem var(--body);background:var(--fg);color:var(--bg);border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+
+/* road */
+.road{background:var(--asphalt);color:var(--asphalt-fg);position:relative;overflow:hidden}
+.road::before,.road::after{content:"";position:absolute;left:0;right:0;height:4px;background:var(--asphalt-fg);opacity:.85}
+.road::before{top:14px}.road::after{bottom:14px}
+.road .wrap{padding-block:46px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.dash{position:absolute;left:0;right:0;top:50%;height:6px;background:repeating-linear-gradient(90deg,var(--sign) 0 46px,transparent 46px 92px);opacity:.9;animation:drive 1.6s linear infinite}
+@keyframes drive{to{background-position:-92px 0}}
+@media (prefers-reduced-motion:reduce){.dash{animation:none}}
+.lars-road{width:220px;max-width:42vw;position:relative;z-index:1}
+.report{position:relative;z-index:1;background:var(--asphalt);border:2px solid var(--sign);border-radius:14px;padding:18px 20px;max-width:520px}
+.report .label{color:var(--sign)}
+.report h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-top:6px}
+.report p{margin-top:8px;opacity:.85}
+.honk{margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.honk button{font:700 1rem var(--body);background:var(--sign);color:#17201a;border:0;border-radius:999px;padding:11px 20px;cursor:pointer}
+.honk button:active{transform:scale(.96)}
+.honk output{font-family:var(--mono);font-size:.85rem;opacity:.9}
+@media (max-width:640px){.road .wrap{grid-template-columns:1fr;justify-items:center}}
+
+/* sections */
+section.block .wrap{padding-block:72px}
+.block h2{font-size:clamp(2rem,5vw,3.25rem)}
+.lore{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px}
+.lore .body{display:grid;gap:16px;max-width:62ch}
+.lore .body p:first-child{font-size:1.25rem}
+.gloss{margin-top:28px;display:grid;gap:0;border-top:1px solid var(--line)}
+.gloss div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding-block:12px;border-bottom:1px solid var(--line)}
+.gloss dt{font-family:var(--display);font-weight:800}
+.gloss dd{margin:0;color:var(--muted)}
+@media (max-width:760px){.lore{grid-template-columns:1fr;gap:24px}.gloss div{grid-template-columns:1fr;gap:2px}}
+
+.steps{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;list-style:none;padding:0;counter-reset:s}
+.steps li{counter-increment:s;border-top:4px solid var(--fg);padding-top:16px;display:grid;gap:8px;align-content:start}
+.steps li::before{content:"Step " counter(s);font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.steps h3{font-size:1.4rem}
+.steps p{color:var(--muted)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+.setup{background:var(--surface);border-block:1px solid var(--line)}
+.facts{margin-top:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--fg);border-radius:14px;overflow:hidden}
+.facts div{padding:18px;border-right:1px solid var(--line);display:grid;gap:6px;align-content:start}
+.facts div:last-child{border-right:0}
+.facts strong{font-family:var(--display);font-size:1.6rem;font-variant-numeric:tabular-nums}
+.facts span{color:var(--muted);font-size:.92rem}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(2){border-right:0}.facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.edit-note{margin-top:14px;font-size:.9rem;color:var(--muted)}
+
+.fine{font-size:.95rem;color:var(--muted);max-width:68ch;display:grid;gap:12px}
+footer .wrap{padding-block:28px 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="moose">
+      <path d="M30 30 Q60 21 92 29 Q101 40 96 53 L37 55 Q27 46 30 30Z"/>
+      <path d="M35 33 L22 43 L18 52 L28 55 L40 45Z"/>
+      <path d="M25 41 L8 49 Q3 54 8 58 L15 58 L29 52Z"/>
+      <path d="M17 56 L19 64 L23 56Z"/>
+      <path d="M25 40 L14 35 L9 25 L15 29 L15 20 L19 28 L22 19 L24 29 L28 22 L28 35Z"/>
+      <rect x="37" y="50" width="5.5" height="31" rx="1.5"/>
+      <rect x="47" y="51" width="5.5" height="30" rx="1.5"/>
+      <rect x="83" y="49" width="5.5" height="32" rx="1.5"/>
+      <rect x="92" y="47" width="5.5" height="34" rx="1.5"/>
+      <path d="M95 32 L101 36 L97 40Z"/>
+    </g>
+  </defs>
+</svg>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Lars the Moose<span>$LARS</span></a>
+    <ul>
+      <li><a href="#lore">Lore</a></li>
+      <li><a href="#join">Join the Herd</a></li>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="https://x.com/LarsTheMoose" target="_blank" rel="noopener">@LarsTheMoose</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="label">Varning för älg · Moose on the road</p>
+      <h1>He's not moving.<em>Neither are we.</em></h1>
+      <p class="lede">Lars is a Swedish moose standing in the middle of a forest road. Storms come, charts crash, cars honk. Lars stays put. $LARS is the memecoin for everyone who holds like Lars.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#join">Join the Herd</a>
+        <a class="btn" href="https://x.com/LarsTheMoose" target="_blank" rel="noopener">Follow on X</a>
+      </div>
+      <div class="ca">
+        <span class="label">Contract</span>
+        <code id="ca">Posted here at launch</code>
+        <button type="button" id="copy">Copy</button>
+      </div>
+    </div>
+    <svg class="sign" viewBox="0 0 120 108" role="img" aria-label="Yellow Swedish moose warning sign">
+      <path d="M60 4 L116 102 L4 102 Z" fill="var(--sign-red)" stroke="var(--sign-red)" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M60 18 L104 95 L16 95 Z" fill="var(--sign)" stroke="var(--sign)" stroke-width="3" stroke-linejoin="round"/>
+      <g transform="translate(30 50) scale(.54)" fill="#17201a"><use href="#moose"/></g>
+    </svg>
+  </div>
+</header>
+
+<section class="road" aria-label="Traffic report">
+  <div class="dash"></div>
+  <div class="wrap">
+    <svg class="lars-road" viewBox="0 0 106 84" role="img" aria-label="Lars standing on the road">
+      <g fill="var(--asphalt-fg)"><use href="#moose"/></g>
+    </svg>
+    <div class="report">
+      <p class="label">Traffic report · E4 northbound</p>
+      <h2 id="day">Lars still on the road.</h2>
+      <p>Expect delays. Lars has no plans to move.</p>
+      <div class="honk">
+        <button type="button" id="honk">Honk at Lars</button>
+        <output id="honk-out" aria-live="polite">0 honks. 0 hooves moved.</output>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="lore">
+  <div class="wrap lore">
+    <div>
+      <p class="label">The lore</p>
+      <h2>A moose who never leaves the road.</h2>
+    </div>
+    <div>
+      <div class="body">
+        <p>Nobody knows how long Lars has been standing there. Truckers swear he was on the E4 before the asphalt.</p>
+        <p>He has been honked at, flashed at, rained on and snowed under. He watched three bull runs and two crashes go by at 90 km/h. He did not move for any of them.</p>
+        <p>The Herd is everyone who stands with him. When the chart turns red, we post Lars. Unchanged. Unbothered.</p>
+      </div>
+      <dl class="gloss">
+        <div><dt>The Herd</dt><dd>Everyone holding $LARS.</dd></div>
+        <div><dt>Diamond hooves</dt><dd>Holding through a red week without flinching.</dd></div>
+        <div><dt>Leaving the road</dt><dd>Selling. Lars doesn't judge. Lars doesn't move either.</dd></div>
+        <div><dt>Traffic report</dt><dd>The daily post on how long Lars has been standing there.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="join">
+  <div class="wrap">
+    <p class="label">Join the Herd</p>
+    <h2>Three steps onto the road.</h2>
+    <ol class="steps">
+      <li><h3>Get a Solana wallet</h3><p>Set up a self-custody Solana wallet like Phantom or Solflare. Write down your seed phrase and keep it offline.</p></li>
+      <li><h3>Add SOL</h3><p>Buy SOL on an exchange and send it to your wallet. Only use money you can afford to lose.</p></li>
+      <li><h3>Buy on pump.fun</h3><p>Search the official contract from this page on pump.fun, connect your wallet and buy. Always check the address against this site and <a href="https://x.com/LarsTheMoose" target="_blank" rel="noopener">@LarsTheMoose</a> on X.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block setup" id="setup">
+  <div class="wrap">
+    <p class="label">Setup</p>
+    <h2>Simple, public, no tricks.</h2>
+    <div class="facts">
+      <div><span>Supply</span><strong>1,000,000,000</strong><span>$LARS total</span></div>
+      <div><span>Chain</span><strong>Solana</strong><span>Launched on pump.fun</span></div>
+      <div><span>Liquidity</span><strong>Curve</strong><span>Pump.fun bonding curve, then PumpSwap after graduation</span></div>
+      <div><span>Dev wallet</span><strong>Public</strong><span>Address shared at launch</span></div>
+    </div>
+    <p class="edit-note">Fair launch on pump.fun: no presale. The contract and dev wallet addresses go live on this page at launch.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <p class="label">Fine print</p>
+    <div class="fine">
+      <p>$LARS is a memecoin made for fun and community. It has no intrinsic value, no utility, no roadmap and no team promising anything. Nothing on this site is financial advice.</p>
+      <p>Memecoins are extremely volatile and most go to zero. Don't buy more than you can lose. Lars would tell you the same, if moose could talk.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Lars the Moose · $LARS</span>
+    <a href="https://x.com/LarsTheMoose" target="_blank" rel="noopener">Follow @LarsTheMoose on X</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var copy=document.getElementById('copy'),ca=document.getElementById('ca');
+  copy.addEventListener('click',function(){
+    var t=ca.textContent.trim();
+    function sel(){var r=document.createRange();r.selectNodeContents(ca);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){copy.textContent='Copied';setTimeout(function(){copy.textContent='Copy'},1500)},sel);
+    }else sel();
+  });
+
+  var replies=["Lars did not move.","Lars blinked. Slowly.","Still there.","Lars has seen worse.","Diamond hooves.","A truck honked louder in 2022. Nothing.","Lars is chewing. That's it.","Recalculating route around Lars…"];
+  var n=0;try{n=parseInt(localStorage.getItem('honks')||'0',10)||0}catch(e){}
+  var out=document.getElementById('honk-out');
+  function show(msg){out.textContent=n+(n===1?' honk':' honks')+'. 0 hooves moved.'+(msg?' '+msg:'');}
+  show('');
+  document.getElementById('honk').addEventListener('click',function(){
+    n++;try{localStorage.setItem('honks',String(n))}catch(e){}
+    show(replies[(n-1)%replies.length]);
+  });
+})();
+</script>
+
+</body>
+</html>
